@@ -7,11 +7,13 @@ function App() {
       <AuthContextProvider>
         <Navbar />
         <main>
-          <textarea
-            className="full-size mt-2"
-            wrap="off"
-            spellCheck="false"
-          ></textarea>
+          <div className="row justify-content-center mb-2">
+            <textarea
+              className="full-size p-3"
+              wrap="off"
+              spellCheck="false"
+            ></textarea>
+          </div>
         </main>
       </AuthContextProvider>
     </div>

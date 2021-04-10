@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #424141 !important;
+  background-color: #292929 !important;
   color: #fff !important;
 }
 
@@ -13,49 +13,11 @@ html,
 body,
 main {
   height: 100% !important;
+  margin: 0;
+  padding: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.app-title {
-  font-family: "Mansalva", cursive;
-  font-size: 2.5vw !important;
-  color: #fff !important;
-}
-
-.custom-navbar {
-  background-color: #333333 !important;
-}
-
-textarea.full-size {
-  background-color: #424141 !important;
-
-  position: fixed;
-  left: 2.5rem;
-  right: 0;
-  border: 0;
-  color: #fff;
-  padding: 0;
-  white-space: pre;
-  width: 100%;
-  font-family: "Open Sans", sans-serif;
-  outline: none;
-  resize: none;
-  font-size: 1rem;
-  overflow-x: auto;
-  height: calc(100% - 5.6rem);
-}
-
-#root {
-  height: 100% !important;
-  width: 100% !important;
-  min-height: 100% !important;
-}
-
-[class^="navbar-"],
-[class^="nav-"] {
-  color: #fff !important;
 }
