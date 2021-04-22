@@ -1,8 +1,15 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import LoginModal from "./LoginPage";
 
 const Navbar = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
+
+  const logout = (e) => {
+    e.preventDefault();
+    setAuth({});
+  };
 
   const NavItems = () => {
     const { status, username } = auth;
@@ -13,25 +20,34 @@ const Navbar = (props) => {
             <button type="button" className="btn btn-secondary m-1">
               {username}
             </button>
-
             <button type="button" className="btn btn-secondary m-1">
               My Bins
             </button>
+            <Link to="/about">
+              <button type="button" className="btn btn-secondary m-1">
+                Save
+              </button>
+            </Link>
 
-            <button type="button" className="btn btn-secondary m-1">
+            <button
+              type="button"
+              className="btn btn-secondary m-1"
+              onClick={logout}
+            >
               Logout
             </button>
           </>
         ) : (
           <>
-            <button type="button" className="btn btn-secondary m-1">
-              Login
-            </button>
+            <Link to="/login">
+              <button type="button" className="btn btn-secondary m-1">
+                Login
+              </button>
+            </Link>
 
             <button type="button" className="btn btn-secondary m-1">
               Signup
             </button>
-
             <button type="button" className="btn btn-secondary m-1">
               Save
             </button>
