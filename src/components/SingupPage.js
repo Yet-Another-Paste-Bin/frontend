@@ -183,6 +183,15 @@ const SignupPage = () => {
                   </>
                 )}
               </div>
+              <div className="row mt-2 justify-content-center">
+                <button
+                  type="submit"
+                  className="btn btn-secondary m-1"
+                  onClick={() => history.push("/")}
+                >
+                  Go back to Home
+                </button>
+              </div>
             </form>
           </div>
         </div>
