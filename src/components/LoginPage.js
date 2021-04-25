@@ -118,7 +118,11 @@ const LoginPage = () => {
                     >
                       Login
                     </button>
-                    <button type="button" className="btn btn-secondary m-1">
+                    <button
+                      type="button"
+                      className="btn btn-secondary m-1"
+                      onClick={() => history.push("/signup")}
+                    >
                       Signup
                     </button>
                   </>

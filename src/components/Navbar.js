@@ -44,9 +44,12 @@ const Navbar = (props) => {
               </button>
             </Link>
 
-            <button type="button" className="btn btn-secondary m-1">
-              Signup
-            </button>
+            <Link to="/signup">
+              <button type="button" className="btn btn-secondary m-1">
+                Signup
+              </button>
+            </Link>
+
             <button type="button" className="btn btn-secondary m-1">
               Save
             </button>

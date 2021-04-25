@@ -22,3 +22,28 @@ export const ReqLogin = async (username_para, password) => {
     return { status: false, error: true };
   }
 };
+
+export const ReqSignup = async (username_para, email, password, phoneno) => {
+  try {
+    const res = await instance.post("/api/signup", {
+      username: username_para,
+      email,
+      password,
+      phoneno,
+    });
+    const { id, token, username } = res.data;
+
+    localStorage.setItem("id", id);
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username);
+    return {
+      status: true,
+      error: false,
+      username,
+      token,
+      statusCode: res.status,
+    };
+  } catch (error) {
+    return { status: false, error: true, statusCode: error.response.status };
+  }
+};

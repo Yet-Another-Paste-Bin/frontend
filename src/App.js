@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import AuthContextProvider from "./contexts/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
+import SignupPage from "./components/SingupPage";
 
 const Home = () => {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Switch>
             <Route path="/login" component={LoginPage} exact />
             <Route path="/" component={Home} exact />
+            <Route path="/signup" component={SignupPage} exact />
           </Switch>
         </Router>
       </AuthContextProvider>
