@@ -1,15 +1,26 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-
+import { BinContext } from "../contexts/BinContext";
+import { ReqPostBin } from "../utils/networkUtils";
 const Navbar = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
+  const { binLink, setBinLink } = useContext(BinContext);
+  const location = useLocation();
 
   const logout = (e) => {
     e.preventDefault();
     setAuth({});
   };
 
+  const postBin = async () => {
+    const bin = document.getElementById("textbin").value.trim();
+    if (bin === "") return;
+    const { id, error } = await ReqPostBin(bin, false);
+    if (id) {
+      setBinLink(window.location.origin.toString() + "/" + id);
+    }
+  };
   const NavItems = () => {
     const { status, username } = auth;
     return (
@@ -22,11 +33,14 @@ const Navbar = (props) => {
             <button type="button" className="btn btn-secondary m-1">
               My Bins
             </button>
-            <Link to="/about">
-              <button type="button" className="btn btn-secondary m-1">
-                Save
-              </button>
-            </Link>
+
+            <button
+              type="button"
+              className="btn btn-secondary m-1"
+              onClick={postBin}
+            >
+              Save
+            </button>
 
             <button
               type="button"
@@ -50,7 +64,11 @@ const Navbar = (props) => {
               </button>
             </Link>
 
-            <button type="button" className="btn btn-secondary m-1">
+            <button
+              type="button"
+              className="btn btn-secondary m-1"
+              onClick={postBin}
+            >
               Save
             </button>
           </>
@@ -58,13 +76,33 @@ const Navbar = (props) => {
       </>
     );
   };
-
   return (
     <div className="container-fluid">
       <div className="row justify-content-around py-3">
         <div className="custom-card px-3 pt-3 pb-2 custom-nav">
           <h2 className="app-title">{"</>"} Yet Another Paste Bin</h2>
         </div>
+        {location.pathname === "/" && binLink !== "" ? (
+          <>
+            <div className="pt-3">
+              <div className="input-group">
+                <input
+                  id="binlink"
+                  type="text"
+                  className="form-control"
+                  placeholder="Bin Link"
+                  value={binLink}
+                  readOnly
+                />
+                <div className="input-group-append">
+                  <button className="btn btn-outline-secondary" type="button">
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
 
         <div className="px-3 py-2 ">
           <NavItems />

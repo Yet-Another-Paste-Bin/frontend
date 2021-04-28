@@ -47,3 +47,37 @@ export const ReqSignup = async (username_para, email, password, phoneno) => {
     return { status: false, error: true, statusCode: error.response.status };
   }
 };
+
+export const ReqPostBin = async (bin, privateBin = false) => {
+  try {
+    const res = await instance.post("/api/bin", {
+      data: bin,
+      private: privateBin,
+    });
+    if (res.status === 200) {
+      const { binId } = res.data;
+      if (res.data.binId) {
+        return { id: binId };
+      }
+    }
+    return { error: true };
+  } catch (error) {}
+};
+
+export const ReqBin = async (binId) => {
+  const reqData = {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    owner_id: localStorage.getItem("id"),
+  };
+  try {
+    const res = await instance.get(`/api/bin/${binId}`, reqData);
+    if (res.status === 200) {
+      const { data } = res.data;
+      if (res.data) {
+        return { data };
+      }
+    } else if (res.status === 403) return { error: true };
+  } catch (error) {
+    return { error: true };
+  }
+};
