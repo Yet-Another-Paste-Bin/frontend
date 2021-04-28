@@ -19,7 +19,7 @@ const Navbar = (props) => {
   const postBin = async () => {
     const bin = document.getElementById("textbin").value.trim();
     if (bin === "") return;
-    const { id, error } = await ReqPostBin(bin, false);
+    const { id } = await ReqPostBin(bin, false);
     if (id) {
       setBinLink(window.location.origin.toString() + "/" + id);
     }

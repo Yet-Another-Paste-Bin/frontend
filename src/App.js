@@ -10,9 +10,6 @@ import { ReqBin } from "./utils/networkUtils";
 class Home extends Component {
   static contextType = BinContext;
 
-  constructor() {
-    super();
-  }
   handleChange = () => {
     const rawBinText = document.getElementById("textbin").value;
     if (this.binText !== rawBinText) {
@@ -27,7 +24,7 @@ class Home extends Component {
     if (this.props.match.params.binid) {
       document.getElementById("textbin").disabled = true;
       ReqBin(this.props.match.params.binid)
-        .then(({ data, err }) => {
+        .then(({ data }) => {
           if (data) {
             this.context.setBinText(data);
             return;
