@@ -98,7 +98,14 @@ const Navbar = (props) => {
                   readOnly
                 />
                 <div className="input-group-append">
-                  <button className="btn btn-outline-secondary" type="button">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigator.clipboard.writeText(binLink);
+                    }}
+                  >
                     Copy
                   </button>
                 </div>
