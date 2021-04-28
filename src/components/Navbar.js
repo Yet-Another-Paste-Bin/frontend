@@ -5,11 +5,14 @@ import { BinContext } from "../contexts/BinContext";
 import { ReqPostBin } from "../utils/networkUtils";
 const Navbar = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
-  const { binLink, setBinLink } = useContext(BinContext);
+  const { binLink, setBinLink, setBinText } = useContext(BinContext);
   const location = useLocation();
 
   const logout = (e) => {
     e.preventDefault();
+    localStorage.clear();
+    setBinLink("");
+    setBinText("");
     setAuth({});
   };
 
