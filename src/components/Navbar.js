@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+
 import { BinContext } from "../contexts/BinContext";
 import { ReqPostBin } from "../utils/networkUtils";
 const Navbar = (props) => {
@@ -141,6 +142,17 @@ const Navbar = (props) => {
 
         <div className="px-3 py-2 ">
           <NavItems />
+        </div>
+      </div>
+
+      <div className="row justify-content-around">
+        <div
+          className="alert alert-danger text-center d-none"
+          role="alert"
+          style={{ width: "60%" }}
+          id="error-alert"
+        >
+          Sorry of inconvenience <br /> Please try again later
         </div>
       </div>
     </div>

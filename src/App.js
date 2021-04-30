@@ -12,6 +12,9 @@ class Home extends Component {
 
   handleChange = () => {
     const rawBinText = document.getElementById("textbin").value;
+    if (!document.getElementById("error-alert").classList.contains("d-none")) {
+      document.getElementById("error-alert").classList.add("d-none");
+    }
     if (this.binText !== rawBinText) {
       this.context.setBinText(rawBinText);
       this.context.setBinLink("");
@@ -25,17 +28,21 @@ class Home extends Component {
     if (this.props.match.params.binid) {
       document.getElementById("textbin").disabled = true;
       ReqBin(this.props.match.params.binid)
-        .then(({ data }) => {
+        .then(({ data, notfound }) => {
           if (data) {
             this.context.setBinText(data);
             document.getElementById("textbin").disabled = false;
+            return;
+          }
+          if (notfound) {
+            document.getElementById("error-alert").innerHTML = "Bin Not Found";
+            document.getElementById("error-alert").classList.remove("d-none");
             return;
           }
           document.getElementById("textbin").disabled = false;
           return this.props.history.push("/");
         })
         .catch((er) => {
-          console.log(er);
           document.getElementById("textbin").disabled = false;
         });
     }
@@ -67,7 +74,6 @@ function App() {
         <BinContextProvider>
           <Router>
             <Navbar />
-
             <Switch>
               <Route path="/login" component={LoginPage} exact />
               <Route path="/" component={Home} exact />

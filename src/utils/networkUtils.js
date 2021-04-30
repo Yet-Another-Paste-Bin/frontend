@@ -80,7 +80,10 @@ export const ReqBin = async (binId) => {
       if (res.data) {
         return { data };
       }
-    } else if (res.status === 403) return { error: true };
+    } else if (res.status === 400) return { error: false, notfound: true };
+    else {
+      return { error: false, notfound: true };
+    }
   } catch (error) {
     return { error: true };
   }
