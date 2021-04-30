@@ -15,6 +15,7 @@ class Home extends Component {
     if (this.binText !== rawBinText) {
       this.context.setBinText(rawBinText);
       this.context.setBinLink("");
+      this.props.history.push("/");
     }
   };
 
@@ -27,12 +28,16 @@ class Home extends Component {
         .then(({ data }) => {
           if (data) {
             this.context.setBinText(data);
+            document.getElementById("textbin").disabled = false;
             return;
           }
           document.getElementById("textbin").disabled = false;
           return this.props.history.push("/");
         })
-        .catch((er) => console.log(er));
+        .catch((er) => {
+          console.log(er);
+          document.getElementById("textbin").disabled = false;
+        });
     }
   }
 

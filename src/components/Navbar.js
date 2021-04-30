@@ -7,6 +7,7 @@ const Navbar = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
   const { binLink, setBinLink, setBinText } = useContext(BinContext);
   const location = useLocation();
+  const { status, username } = auth;
 
   const logout = (e) => {
     e.preventDefault();
@@ -19,13 +20,50 @@ const Navbar = (props) => {
   const postBin = async () => {
     const bin = document.getElementById("textbin").value.trim();
     if (bin === "") return;
-    const { id } = await ReqPostBin(bin, false);
-    if (id) {
-      setBinLink(window.location.origin.toString() + "/" + id);
+    console.log();
+    const isPrivate = document.getElementById("privatbin")?.checked || false;
+    const res = await ReqPostBin(bin, isPrivate);
+    if (res && res.id) {
+      if (document.getElementById("privatbin")) {
+        document.getElementById("privatbin").checked = false;
+      }
+      setBinLink(window.location.origin.toString() + "/" + res.id);
     }
   };
+
+  const SaveBtn = () => {
+    return binLink !== "" ? null : (
+      <>
+        <button
+          type="button"
+          className="btn btn-secondary m-1"
+          onClick={postBin}
+        >
+          Save
+        </button>
+        {status ? (
+          <>
+            <div className="form-check-inline m-1">
+              <label
+                className="form-check-label"
+                style={{ color: "rgb(189, 189, 189)" }}
+              >
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  value=""
+                  id="privatbin"
+                />
+                Private Bin
+              </label>
+            </div>
+          </>
+        ) : null}
+      </>
+    );
+  };
+
   const NavItems = () => {
-    const { status, username } = auth;
     return (
       <>
         {status ? (
@@ -36,14 +74,7 @@ const Navbar = (props) => {
             <button type="button" className="btn btn-secondary m-1">
               My Bins
             </button>
-
-            <button
-              type="button"
-              className="btn btn-secondary m-1"
-              onClick={postBin}
-            >
-              Save
-            </button>
+            <SaveBtn />
 
             <button
               type="button"
@@ -67,13 +98,7 @@ const Navbar = (props) => {
               </button>
             </Link>
 
-            <button
-              type="button"
-              className="btn btn-secondary m-1"
-              onClick={postBin}
-            >
-              Save
-            </button>
+            <SaveBtn />
           </>
         )}
       </>
