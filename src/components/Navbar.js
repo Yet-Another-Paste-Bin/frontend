@@ -72,9 +72,9 @@ const Navbar = (props) => {
             <button type="button" className="btn btn-secondary m-1">
               {username}
             </button>
-            <button type="button" className="btn btn-secondary m-1">
+            {/* <button type="button" className="btn btn-secondary m-1">
               My Bins
-            </button>
+            </button> */}
             <SaveBtn />
 
             <button
