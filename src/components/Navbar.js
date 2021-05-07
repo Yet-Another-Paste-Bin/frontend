@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 import { BinContext } from "../contexts/BinContext";
@@ -9,6 +9,7 @@ const Navbar = (props) => {
   const { binLink, setBinLink, setBinText } = useContext(BinContext);
   const location = useLocation();
   const { status, username } = auth;
+  const history = useHistory();
 
   const logout = (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ const Navbar = (props) => {
     setBinLink("");
     setBinText("");
     setAuth({});
+    history.push("/");
   };
 
   const postBin = async () => {
