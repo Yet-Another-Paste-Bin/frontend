@@ -7,6 +7,9 @@ class MyBins extends Component {
   state = { bins: [] };
 
   componentDidMount() {
+    if (localStorage.getItem("id") === null) {
+      this.props.history.push("/");
+    }
     ReqAllBin().then((res) => {
       const { data } = res;
       if (data && data.length > 0) {
