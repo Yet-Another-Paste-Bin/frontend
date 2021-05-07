@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./components/LoginPage";
+import MyBins from "./components/MyBins";
 import Navbar from "./components/Navbar";
 import SignupPage from "./components/SingupPage";
 import AuthContextProvider from "./contexts/AuthContext";
@@ -78,6 +79,7 @@ function App() {
               <Route path="/login" component={LoginPage} exact />
               <Route path="/" component={Home} exact />
               <Route path="/signup" component={SignupPage} exact />
+              <Route path="/mybins" component={MyBins} exact />
               <Route path="/:binid" component={Home} exact />
             </Switch>
           </Router>

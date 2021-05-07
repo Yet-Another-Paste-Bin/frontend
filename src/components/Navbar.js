@@ -21,7 +21,6 @@ const Navbar = (props) => {
   const postBin = async () => {
     const bin = document.getElementById("textbin").value.trim();
     if (bin === "") return;
-    console.log();
     const isPrivate = document.getElementById("privatbin")?.checked || false;
     const res = await ReqPostBin(bin, isPrivate);
     if (res && res.id) {
@@ -72,9 +71,11 @@ const Navbar = (props) => {
             <button type="button" className="btn btn-secondary m-1">
               {username}
             </button>
-            {/* <button type="button" className="btn btn-secondary m-1">
-              My Bins
-            </button> */}
+            <Link to="/mybins">
+              <button type="button" className="btn btn-secondary m-1">
+                My Bins
+              </button>
+            </Link>
             <SaveBtn />
 
             <button

@@ -56,7 +56,11 @@ export const ReqPostBin = async (bin, privateBin = false) => {
           data: bin,
           private: privateBin,
         }
-      : { data: bin, private: privateBin };
+      : {
+          data: bin,
+          private: privateBin,
+          owner_id: localStorage.getItem("id") || "",
+        };
     const res = await instance.post("/api/bin", data);
     if (res.status === 200) {
       const { binId } = res.data;
@@ -74,7 +78,7 @@ export const ReqBin = async (binId) => {
     owner_id: localStorage.getItem("id"),
   };
   try {
-    const res = await instance.get(`/api/bin/${binId}`, reqData);
+    const res = await instance.get(`/api/bin/${binId}`, { headers: reqData });
     if (res.status === 200) {
       const { data } = res.data;
       if (res.data) {
@@ -84,6 +88,26 @@ export const ReqBin = async (binId) => {
     else {
       return { error: false, notfound: true };
     }
+  } catch (error) {
+    return { error: true };
+  }
+};
+
+export const ReqAllBin = async () => {
+  try {
+    const res = await instance.get("/api/bin", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (res.status === 200) {
+      const data = res.data;
+      if (data) {
+        return { data };
+      }
+    } else if (res.status === 400) return { error: false, notfound: true };
+
+    return { error: false, notfound: true };
   } catch (error) {
     return { error: true };
   }
