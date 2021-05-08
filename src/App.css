@@ -150,3 +150,22 @@ active,
 visited {
   text-decoration: none;
 }
+
+.full-size-textarea {
+  display: flex !important;
+  border-style: solid;
+  border-width: 1px;
+  border: #1f1f1f;
+  background-color: transparent;
+  color: rgb(230, 230, 230);
+  white-space: pre;
+  width: 100%;
+  font-family: "Fira Code", monospace;
+  outline: none;
+  resize: vertical;
+  font-size: 1rem;
+  overflow: auto;
+  display: inline;
+  height: 30vh;
+  max-height: 100vh;
+}

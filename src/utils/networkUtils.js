@@ -125,3 +125,18 @@ export const DeleteBin = async (binId) => {
     return 500;
   }
 };
+
+export const UpdateBin = async (bin) => {
+  try {
+    const data = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      binId: bin._id,
+      private: bin.private,
+      data: bin.data,
+    };
+    const res = await instance.put("/api/bin", data);
+    return res.status;
+  } catch (error) {
+    return 500;
+  }
+};

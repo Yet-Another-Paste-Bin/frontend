@@ -1,23 +1,44 @@
 import { faClone } from "@fortawesome/free-regular-svg-icons";
-import { faLock, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faTrash, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { nanoid } from "nanoid";
-import React from "react";
+import React, { useState } from "react";
+import { UpdateBin } from "../utils/networkUtils";
 const BinItem = (props) => {
-  const { bin } = props;
-  const { data, _id } = bin;
+  var { bin } = props;
+  var { data, _id } = bin;
   const binLink = window.location.origin.toString() + "/" + _id;
-  var dataDivId = nanoid();
+  const [updatable, setUpdatable] = useState(false);
+  var dataTextarea = nanoid();
   var collapseId = nanoid();
 
   const copyBinToClipboard = () => {
-    navigator.clipboard.writeText(
-      document.getElementById(dataDivId).textContent
-    );
+    navigator.clipboard.writeText(document.getElementById(dataTextarea).value);
   };
   const copyLinkToClipboard = () => {
     navigator.clipboard.writeText(binLink);
   };
+
+  const handleTextDataChange = () => {
+    const dataval = document.getElementById(dataTextarea).value;
+    if (data === dataval) setUpdatable(false);
+    if (data !== dataval) setUpdatable(true);
+  };
+
+  const updateBin = () => {
+    let tempBin = Object.assign({}, bin);
+    tempBin.data = document.getElementById(dataTextarea).value;
+    UpdateBin(tempBin).then((status) => {
+      if (status === 200) {
+        bin = Object.assign({}, tempBin);
+        data = bin.data;
+        _id = bin._id;
+        document.getElementById(dataTextarea).value = data;
+        setUpdatable(false);
+      }
+    });
+  };
+
   return (
     <div className="container m-1">
       <div className="card">
@@ -70,6 +91,16 @@ const BinItem = (props) => {
               Delete &nbsp;
               <FontAwesomeIcon icon={faTrash} />
             </button>
+            {updatable ? (
+              <button
+                className="btn btn-secondary-revert mx-2 my-1"
+                style={{ color: "rgb(189, 189, 189)" }}
+                onClick={updateBin}
+              >
+                Update &nbsp;
+                <FontAwesomeIcon icon={faUpload} />
+              </button>
+            ) : null}
           </div>
         </div>
         <div className="collapse" id={collapseId}>
@@ -83,7 +114,14 @@ const BinItem = (props) => {
               </span>
             </div>
             <hr />
-            <div id={dataDivId}>{data}</div>
+            <div style={{ fontFamily: "Fira Code", display: "flex" }}>
+              <textarea
+                id={dataTextarea}
+                className="full-size-textarea"
+                defaultValue={data}
+                onChange={handleTextDataChange}
+              ></textarea>
+            </div>
           </div>
         </div>
       </div>
