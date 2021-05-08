@@ -144,3 +144,9 @@ div.card {
 .bg-card-secondary {
   background-color: rgb(44, 44, 44);
 }
+a,
+a:hover,
+active,
+visited {
+  text-decoration: none;
+}

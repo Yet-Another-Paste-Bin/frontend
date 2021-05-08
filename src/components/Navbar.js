@@ -111,9 +111,12 @@ const Navbar = (props) => {
   return (
     <div className="container-fluid">
       <div className="row justify-content-around py-3">
-        <div className="custom-card px-3 pt-3 pb-2 custom-nav">
-          <h2 className="app-title">{"</>"} Yet Another Paste Bin</h2>
-        </div>
+        <Link to="/">
+          <div className="custom-card px-3 pt-3 pb-2 custom-nav">
+            <h2 className="app-title">{"</>"} Yet Another Paste Bin</h2>
+          </div>
+        </Link>
+
         {location.pathname === "/" && binLink !== "" ? (
           <>
             <div className="pt-3">
