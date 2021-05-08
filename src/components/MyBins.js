@@ -30,15 +30,26 @@ class MyBins extends Component {
 
   render() {
     return (
-      <div className="center">
+      <>
         {this.state.bins.length > 0 ? (
-          this.state.bins.map((e) => (
-            <BinItem bin={e} key={nanoid()} deleteFn={this.deleteBin} />
-          ))
+          <div className="center">
+            {this.state.bins.map((e) => (
+              <BinItem bin={e} key={nanoid()} deleteFn={this.deleteBin} />
+            ))}
+          </div>
         ) : (
-          <div></div>
+          <div
+            className="center"
+            style={{
+              minHeight: "40vh",
+              color: "rgb(189, 189, 189)",
+              textAlign: "center",
+            }}
+          >
+            <h1> Oops! No Bins Found </h1>
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }
