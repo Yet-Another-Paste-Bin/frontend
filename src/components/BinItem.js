@@ -20,58 +20,54 @@ const BinItem = (props) => {
     <div className="container m-1">
       <div className="card">
         <div className="card-header">
-          <div className="row">
-            <div className="col-lg-6 col-md-12 col-sm-12">
-              {bin.private ? (
-                <>
-                  <span className="mx-1">
-                    <FontAwesomeIcon icon={faLock} />
-                  </span>
-                  &nbsp;
-                </>
-              ) : null}
+          <div className="row m-1">
+            {bin.private ? (
+              <>
+                <span className="mx-1">
+                  <FontAwesomeIcon icon={faLock} />
+                </span>
+                &nbsp;
+              </>
+            ) : null}
 
-              {binLink}
-            </div>
-            <div className="col-lg-6 col-md-12 col-sm-12">
-              <div className="row text-right justify-content-end">
-                <button
-                  className="btn btn-secondary-revert mx-2 my-1"
-                  data-toggle="collapse"
-                  data-target={`#${collapseId}`}
-                  aria-expanded="false"
-                  aria-controls={collapseId}
-                >
-                  Show Bin Content
-                </button>
-                <button
-                  className="btn btn-secondary-revert mx-2 my-1"
-                  style={{ color: "rgb(189, 189, 189)" }}
-                  onClick={copyBinToClipboard}
-                >
-                  Copy Bin &nbsp;
-                  <FontAwesomeIcon icon={faClone} />
-                </button>
-                <button
-                  className="btn btn-secondary-revert mx-2 my-1"
-                  style={{ color: "rgb(189, 189, 189)" }}
-                  onClick={copyLinkToClipboard}
-                >
-                  Copy Bin Link &nbsp;
-                  <FontAwesomeIcon icon={faClone} />
-                </button>
-                <button
-                  className="btn btn-secondary-revert mx-2 my-1"
-                  style={{ color: "rgb(189, 189, 189)" }}
-                  onClick={() => {
-                    props.deleteFn(_id);
-                  }}
-                >
-                  Delete &nbsp;
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </div>
-            </div>
+            {binLink}
+          </div>
+          <div className="row justify-content-center">
+            <button
+              className="btn btn-secondary-revert mx-2 my-1"
+              data-toggle="collapse"
+              data-target={`#${collapseId}`}
+              aria-expanded="false"
+              aria-controls={collapseId}
+            >
+              Show Bin Content
+            </button>
+            <button
+              className="btn btn-secondary-revert mx-2 my-1"
+              style={{ color: "rgb(189, 189, 189)" }}
+              onClick={copyBinToClipboard}
+            >
+              Copy Bin &nbsp;
+              <FontAwesomeIcon icon={faClone} />
+            </button>
+            <button
+              className="btn btn-secondary-revert mx-2 my-1"
+              style={{ color: "rgb(189, 189, 189)" }}
+              onClick={copyLinkToClipboard}
+            >
+              Copy Bin Link &nbsp;
+              <FontAwesomeIcon icon={faClone} />
+            </button>
+            <button
+              className="btn btn-secondary-revert mx-2 my-1"
+              style={{ color: "rgb(189, 189, 189)" }}
+              onClick={() => {
+                props.deleteFn(_id);
+              }}
+            >
+              Delete &nbsp;
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
           </div>
         </div>
         <div className="collapse" id={collapseId}>
