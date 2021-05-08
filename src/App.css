@@ -11,13 +11,15 @@
 }
 
 .full-size {
+  display: flex !important;
+  align-self: center;
+  justify-self: center;
   border-radius: 1em;
   border-style: solid;
   border-width: 1px;
   border: #1f1f1f;
   background-color: rgb(29, 29, 29);
   color: rgb(230, 230, 230);
-  position: fixed;
   white-space: pre;
   width: 95%;
   font-family: "Fira Code", monospace;
@@ -26,7 +28,7 @@
   font-size: 1rem;
   overflow-x: auto;
   display: inline;
-  height: 80%;
+  height: 80vh;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 

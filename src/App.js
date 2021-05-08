@@ -52,7 +52,7 @@ class Home extends Component {
   render() {
     return (
       <main>
-        <div className="row justify-content-center mb-2">
+        <div className="center mb-3">
           <textarea
             className="full-size p-3"
             wrap="off"
