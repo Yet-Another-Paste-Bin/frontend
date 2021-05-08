@@ -11,7 +11,9 @@ const BinItem = (props) => {
   var collapseId = nanoid();
 
   const copyBinToClipboard = () => {
-    navigator.clipboard.writeText(document.getElementById(dataDivId).innerHTML);
+    navigator.clipboard.writeText(
+      document.getElementById(dataDivId).textContent
+    );
   };
   const copyLinkToClipboard = () => {
     navigator.clipboard.writeText(binLink);
@@ -71,8 +73,17 @@ const BinItem = (props) => {
           </div>
         </div>
         <div className="collapse" id={collapseId}>
-          <div className="card-body bg-card-secondary" id={dataDivId}>
-            {data}
+          <div className="card-body bg-card-secondary">
+            <div className="row justify-content-around">
+              <span>
+                <b>Created At :</b> {new Date(bin.createdAt).toUTCString()}
+              </span>
+              <span>
+                <b>Updated At :</b> {new Date(bin.updatedAt).toUTCString()}
+              </span>
+            </div>
+            <hr />
+            <div id={dataDivId}>{data}</div>
           </div>
         </div>
       </div>
