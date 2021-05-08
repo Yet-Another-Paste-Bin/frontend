@@ -112,3 +112,16 @@ export const ReqAllBin = async () => {
     return { error: true };
   }
 };
+
+export const DeleteBin = async (binId) => {
+  try {
+    const data = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      binId,
+    };
+    const res = await instance.delete("/api/bin", { data });
+    return res.status;
+  } catch (error) {
+    return 500;
+  }
+};

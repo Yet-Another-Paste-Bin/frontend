@@ -1,5 +1,5 @@
 import { faClone } from "@fortawesome/free-regular-svg-icons";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { nanoid } from "nanoid";
 import React from "react";
@@ -32,13 +32,6 @@ const BinItem = (props) => {
               ) : null}
 
               {binLink}
-              <button
-                className="btn btn-secondary-revert mx-2"
-                style={{ color: "rgb(189, 189, 189)" }}
-                onClick={copyLinkToClipboard}
-              >
-                <FontAwesomeIcon icon={faClone} />
-              </button>
             </div>
             <div className="col-lg-6 col-md-12 col-sm-12">
               <div className="row text-right justify-content-end">
@@ -56,8 +49,26 @@ const BinItem = (props) => {
                   style={{ color: "rgb(189, 189, 189)" }}
                   onClick={copyBinToClipboard}
                 >
-                  Copy Bin&nbsp;
+                  Copy Bin &nbsp;
                   <FontAwesomeIcon icon={faClone} />
+                </button>
+                <button
+                  className="btn btn-secondary-revert mx-2 my-1"
+                  style={{ color: "rgb(189, 189, 189)" }}
+                  onClick={copyLinkToClipboard}
+                >
+                  Copy Bin Link &nbsp;
+                  <FontAwesomeIcon icon={faClone} />
+                </button>
+                <button
+                  className="btn btn-secondary-revert mx-2 my-1"
+                  style={{ color: "rgb(189, 189, 189)" }}
+                  onClick={() => {
+                    props.deleteFn(_id);
+                  }}
+                >
+                  Delete &nbsp;
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
               </div>
             </div>
