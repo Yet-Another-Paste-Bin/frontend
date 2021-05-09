@@ -50,17 +50,17 @@ export const ReqSignup = async (username_para, email, password, phoneno) => {
 
 export const ReqPostBin = async (bin, privateBin = false) => {
   try {
-    const data = privateBin
-      ? {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          data: bin,
-          private: privateBin,
-        }
-      : {
-          data: bin,
-          private: privateBin,
-          owner_id: localStorage.getItem("id") || "",
-        };
+    const data =
+      localStorage.getItem("id") === null
+        ? {
+            data: bin,
+            private: privateBin,
+          }
+        : {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            data: bin,
+            private: privateBin,
+          };
     const res = await instance.post("/api/bin", data);
     if (res.status === 200) {
       const { binId } = res.data;
