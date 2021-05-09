@@ -9,6 +9,11 @@ const LoginPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [isError, setisError] = useState(false);
+  const [alertMsg, setAlertMsg] = useState(
+    <>
+      Sorry of inconvenience <br /> Please try again later
+    </>
+  );
   const history = useHistory();
 
   useEffect(() => {
@@ -39,31 +44,41 @@ const LoginPage = () => {
     if (![username_text, password].includes("")) {
       setLoading(true);
       try {
-        const {
-          status = false,
-          error = false,
-          username,
-          token,
-        } = await ReqLogin(username_text, password);
-        if (error) {
-          setisError(true);
-          setLoading(false);
-          return;
-        }
-        if (!status) {
-          context.setAuth({
-            status,
-          });
-          setLoading(false);
-          return;
-        }
-        context.setAuth({
-          status,
-          username,
-          authtoken: token,
-        });
+        const { username, token, statusCode } = await ReqLogin(
+          username_text,
+          password
+        );
         setLoading(false);
-        history.push("/");
+
+        if (statusCode === 401) {
+          setisError(true);
+          setAlertMsg("Check Username/Password");
+          context.setAuth({
+            status: false,
+          });
+          return;
+        } else if (statusCode === 200) {
+          context.setAuth({
+            status: true,
+            username,
+            authtoken: token,
+          });
+          history.push("/");
+          return;
+        } else if (statusCode === 204) {
+          setisError(true);
+          setAlertMsg("Username/Email not found !");
+          context.setAuth({
+            status: false,
+          });
+          return;
+        }
+        setisError(true);
+        setAlertMsg(
+          <>
+            Sorry of inconvenience <br /> Please try again later
+          </>
+        );
       } catch (error) {}
     }
   };
@@ -102,10 +117,11 @@ const LoginPage = () => {
               />
               {isError ? (
                 <div
+                  id="alter-div"
                   className="alert alert-danger mt-4 text-center"
                   role="alert"
                 >
-                  Sorry of inconvenience <br /> Please try again later
+                  {alertMsg}
                 </div>
               ) : null}
               <div className="row mt-4 justify-content-center">

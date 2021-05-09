@@ -9,17 +9,19 @@ export const ReqLogin = async (username_para, password) => {
       username: username_para,
       password,
     });
-    if ([401, 204].includes(res.status)) {
-      return { status: false, error: false };
-    }
+
     const { id, token, username } = res.data;
 
     localStorage.setItem("id", id);
     localStorage.setItem("token", token);
     localStorage.setItem("username", username);
-    return { status: true, error: false, username, token };
+    return {
+      username,
+      token,
+      statusCode: res.status,
+    };
   } catch (error) {
-    return { status: false, error: true };
+    return { status: false, statusCode: 401 };
   }
 };
 
