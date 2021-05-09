@@ -126,6 +126,8 @@ const SignupPage = () => {
                 id="sgpassword"
                 placeholder="Enter Password"
                 onChange={checkText}
+                pattern="(.*).{8,}"
+                title="Must contain at least 8 or more characters"
                 style={{ maxWidth: "90%" }}
                 minLength="8"
                 required
@@ -150,6 +152,8 @@ const SignupPage = () => {
                 minLength="10"
                 onChange={checkText}
                 style={{ maxWidth: "90%" }}
+                pattern="[0-9]{10}"
+                title="10 Digit Phone No"
                 required
               />
               {isError ? (

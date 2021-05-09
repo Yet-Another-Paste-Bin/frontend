@@ -94,6 +94,8 @@ const LoginPage = () => {
                 className="form-control"
                 id="password"
                 placeholder="Enter Password"
+                pattern="(.*).{8,}"
+                title="Must contain at least 8 or more characters"
                 onChange={checkText}
                 style={{ maxWidth: "90%" }}
                 required
