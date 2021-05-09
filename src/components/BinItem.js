@@ -107,6 +107,9 @@ const BinItem = (props) => {
           <div className="card-body bg-card-secondary">
             <div className="row justify-content-around">
               <span>
+                <b>Owned By :</b> {bin.owner_username}
+              </span>
+              <span>
                 <b>Created At :</b> {new Date(bin.createdAt).toUTCString()}
               </span>
               <span>
