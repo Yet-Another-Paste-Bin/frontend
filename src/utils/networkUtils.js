@@ -9,7 +9,7 @@ export const ReqLogin = async (username_para, password) => {
       username: username_para,
       password,
     });
-    if (res.status === 401) {
+    if ([401, 204].includes(res.status)) {
       return { status: false, error: false };
     }
     const { id, token, username } = res.data;
