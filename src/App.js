@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import ForgetPasswordPage from "./components/ForgetPasswordPage";
 import LoginPage from "./components/LoginPage";
 import MyBins from "./components/MyBins";
 import Navbar from "./components/Navbar";
+import PasswordResetPage from "./components/PasswordResetPage";
 import SignupPage from "./components/SingupPage";
 import AuthContextProvider from "./contexts/AuthContext";
 import BinContextProvider, { BinContext } from "./contexts/BinContext";
@@ -80,6 +82,16 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path="/signup" component={SignupPage} exact />
               <Route path="/mybins" component={MyBins} exact />
+              <Route
+                path="/forgotpassword"
+                component={ForgetPasswordPage}
+                exact
+              />
+              <Route
+                path="/passwordreset"
+                component={PasswordResetPage}
+                exact
+              />
               <Route path="/:binid" component={Home} exact />
             </Switch>
           </Router>

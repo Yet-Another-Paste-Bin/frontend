@@ -142,3 +142,40 @@ export const UpdateBin = async (bin) => {
     return 500;
   }
 };
+
+export const ReqPasswordResetToken = async (username, email, phoneno) => {
+  try {
+    const data = {
+      username,
+      email,
+      phoneno,
+    };
+    const res = await instance.post("/api/requestpasswordreset", data);
+    if (res.status === 200)
+      return {
+        status: res.status,
+        passwordresettoken: res.data.passwordresettoken,
+      };
+    return {
+      status: res.status,
+    };
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
+};
+export const ReqPasswordReset = async (password, passwordresettoken) => {
+  try {
+    const data = {
+      password,
+      passwordresettoken,
+    };
+    const res = await instance.post("/api/forgotpassword", data);
+    return { status: res.status };
+  } catch (error) {
+    return {
+      status: 500,
+    };
+  }
+};
