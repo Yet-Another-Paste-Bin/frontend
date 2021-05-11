@@ -34,7 +34,7 @@ const Navbar = (props) => {
   };
 
   const SaveBtn = () => {
-    return binLink !== "" ? null : (
+    return binLink === "" && history.location.pathname === "/" ? (
       <>
         <button
           type="button"
@@ -62,7 +62,7 @@ const Navbar = (props) => {
           </>
         ) : null}
       </>
-    );
+    ) : null;
   };
 
   const NavItems = () => {
