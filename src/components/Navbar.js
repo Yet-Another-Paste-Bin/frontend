@@ -105,6 +105,13 @@ const Navbar = (props) => {
             <SaveBtn />
           </>
         )}
+        {history.location.pathname !== "/" ? (
+          <Link to="/">
+            <button type="button" className="btn btn-secondary m-1">
+              Home
+            </button>
+          </Link>
+        ) : null}
       </>
     );
   };
