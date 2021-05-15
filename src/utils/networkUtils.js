@@ -9,15 +9,17 @@ export const ReqLogin = async (username_para, password) => {
       username: username_para,
       password,
     });
-
     const { id, token, username } = res.data;
 
-    localStorage.setItem("id", id);
-    localStorage.setItem("token", token);
-    localStorage.setItem("username", username);
+    if (res.status === 200) {
+      localStorage.setItem("id", id);
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", username);
+    }
+
     return {
-      username,
-      token,
+      username: username || "",
+      token: token || "",
       statusCode: res.status,
     };
   } catch (error) {
