@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const BASE_URL = process.env.BASE_URL || "http://localhost:8000";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:8000";
 const instance = Axios.create({ baseURL: BASE_URL });
 
 export const ReqLogin = async (username_para, password) => {
