@@ -77,10 +77,13 @@ export const ReqPostBin = async (bin, privateBin = false) => {
 };
 
 export const ReqBin = async (binId) => {
-  const reqData = {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-    owner_id: localStorage.getItem("id"),
-  };
+  const reqData =
+    localStorage.getItem("id") === null
+      ? {}
+      : {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          owner_id: localStorage.getItem("id"),
+        };
   try {
     const res = await instance.get(`/api/bin/${binId}`, { headers: reqData });
     if (res.status === 200) {
