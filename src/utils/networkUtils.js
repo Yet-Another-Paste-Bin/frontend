@@ -66,14 +66,10 @@ export const ReqPostBin = async (bin, privateBin = false) => {
             private: privateBin,
           };
     const res = await instance.post("/api/bin", data);
-    if (res.status === 200) {
-      const { binId } = res.data;
-      if (res.data.binId) {
-        return { id: binId };
-      }
-    }
-    return { error: true };
-  } catch (error) {}
+    return res;
+  } catch (error) {
+    return { status: 500 };
+  }
 };
 
 export const ReqBin = async (binId) => {

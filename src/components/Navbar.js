@@ -1,15 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-
 import { BinContext } from "../contexts/BinContext";
 import { ReqPostBin } from "../utils/networkUtils";
+import { BeatLoader } from "react-spinners";
+const RequestStates = {
+  notRequested: "notRequested",
+  requesting: "requesting",
+  requestSuccessful: "requestSuccessful",
+  requestUnsuccessful: "requestUnsuccessful",
+};
+
 const Navbar = (props) => {
   const { auth, setAuth } = useContext(AuthContext);
   const { binLink, setBinLink, setBinText } = useContext(BinContext);
   const location = useLocation();
   const { status, username } = auth;
   const history = useHistory();
+  const [requestState, setRequestState] = useState({
+    state: RequestStates.notRequested,
+    message: "",
+  });
 
   const logout = (e) => {
     e.preventDefault();
@@ -24,13 +35,28 @@ const Navbar = (props) => {
     const bin = document.getElementById("textbin").value.trim();
     if (bin === "") return;
     const isPrivate = document.getElementById("privatbin")?.checked || false;
+    setRequestState({ state: RequestStates.requesting, message: "" });
     const res = await ReqPostBin(bin, isPrivate);
-    if (res && res.id) {
+    if (res.status === 200 && res.data.id) {
       if (document.getElementById("privatbin")) {
         document.getElementById("privatbin").checked = false;
       }
-      setBinLink(window.location.origin.toString() + "/" + res.id);
+      setBinLink(window.location.origin.toString() + "/" + res.data.id);
+      setRequestState({ state: RequestStates.requestSuccessful });
+      return;
     }
+
+    setRequestState({
+      state: RequestStates.requestUnsuccessful,
+      message:
+        res.status === 500
+          ? "Sorry of inconvenience Please try again later"
+          : "Invalid Username",
+    });
+    setInterval(
+      () => setRequestState({ state: RequestStates.notRequested, message: "" }),
+      3000
+    );
   };
 
   const SaveBtn = () => {
@@ -66,53 +92,77 @@ const Navbar = (props) => {
   };
 
   const NavItems = () => {
+    if (requestState.state === RequestStates.requesting) {
+      return (
+        <div className="row" style={{ paddingTop: "15px" }}>
+          <span className="px-2" style={{ color: "rgb(189, 189, 189)" }}>
+            <b>Saving</b>
+          </span>
+          <BeatLoader size="20px" loading={true} />
+        </div>
+      );
+    } else if (
+      [RequestStates.requestSuccessful, RequestStates.notRequested].includes(
+        requestState.state
+      )
+    ) {
+      return (
+        <>
+          {status ? (
+            <>
+              <button type="button" className="btn btn-secondary m-1">
+                {username}
+              </button>
+              <Link to="/mybins">
+                <button type="button" className="btn btn-secondary m-1">
+                  My Bins
+                </button>
+              </Link>
+              <SaveBtn />
+
+              <button
+                type="button"
+                className="btn btn-secondary m-1"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <button type="button" className="btn btn-secondary m-1">
+                  Login
+                </button>
+              </Link>
+
+              <Link to="/signup">
+                <button type="button" className="btn btn-secondary m-1">
+                  Signup
+                </button>
+              </Link>
+
+              <SaveBtn />
+            </>
+          )}
+          {history.location.pathname !== "/" ? (
+            <Link to="/">
+              <button type="button" className="btn btn-secondary m-1">
+                Home
+              </button>
+            </Link>
+          ) : null}
+        </>
+      );
+    }
     return (
-      <>
-        {status ? (
-          <>
-            <button type="button" className="btn btn-secondary m-1">
-              {username}
-            </button>
-            <Link to="/mybins">
-              <button type="button" className="btn btn-secondary m-1">
-                My Bins
-              </button>
-            </Link>
-            <SaveBtn />
-
-            <button
-              type="button"
-              className="btn btn-secondary m-1"
-              onClick={logout}
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">
-              <button type="button" className="btn btn-secondary m-1">
-                Login
-              </button>
-            </Link>
-
-            <Link to="/signup">
-              <button type="button" className="btn btn-secondary m-1">
-                Signup
-              </button>
-            </Link>
-
-            <SaveBtn />
-          </>
-        )}
-        {history.location.pathname !== "/" ? (
-          <Link to="/">
-            <button type="button" className="btn btn-secondary m-1">
-              Home
-            </button>
-          </Link>
-        ) : null}
-      </>
+      <div>
+        <div className="row" style={{ paddingTop: "15px" }}>
+          <span className="px-2" style={{ color: "rgb(189, 189, 189)" }}>
+            <b>{requestState.message}</b>
+          </span>
+        </div>
+      </div>
     );
   };
   return (
