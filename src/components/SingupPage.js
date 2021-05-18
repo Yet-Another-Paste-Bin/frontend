@@ -94,7 +94,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div style={{ height: "80vh" }}>
+    <div className="my-2" style={{ height: "80vh" }}>
       <div className="wrapper">
         <div className="card" style={{ width: "20rem", maxWidth: "90%" }}>
           <div className="card-body center">
