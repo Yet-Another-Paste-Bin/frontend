@@ -1,15 +1,17 @@
-import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import React, { useState, useEffect } from "react";
 import { ReqSignup } from "../utils/networkUtils";
 import { MoonLoader } from "react-spinners";
 import { useHistory } from "react-router";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
-  const [isError, setisError] = useState(false);
-  const [alertText, setAlertText] = useState("");
+  const [alert, setAlert] = useState({
+    show: false,
+    text: "",
+    type: "alert-danger",
+  });
+
   const history = useHistory();
-  const [alertType, setAlertType] = useState("alert-danger");
 
   useEffect(() => {
     if (loading) {
@@ -29,8 +31,8 @@ const SignupPage = () => {
   }, [loading]);
 
   const checkText = (e) => {
-    if (document.getElementById(e.target.id).value !== "" && isError) {
-      setisError(false);
+    if (document.getElementById(e.target.id).value !== "" && alert.show) {
+      setAlert({ ...alert, show: false });
     }
   };
   const signup = async (e) => {
@@ -42,8 +44,12 @@ const SignupPage = () => {
     const phoneno = document.getElementById("sgphoneno").value;
 
     if (conf !== password) {
-      setisError(true);
-      setAlertText("Password And Confirm Password Doesn't Match");
+      setAlert({
+        ...alert,
+        show: true,
+        text: "Password And Confirm Password Doesn't Match",
+      });
+
       return;
     }
 
@@ -58,24 +64,29 @@ const SignupPage = () => {
         );
 
         if (statusCode === 400) {
-          setisError(true);
-          setAlertText("Account with given Username/Email already exists !");
+          setAlert({
+            type: "alert-danger",
+            show: true,
+            text: "Password And Confirm Password Doesn't Match",
+          });
           setLoading(false);
-          if (alertType !== "alert-danger") setAlertType("alert-danger");
+
           return;
-        }
-        if (statusCode === 500) {
-          setisError(true);
-          setAlertText("Sorry of inconvenience Please try again later");
+        } else if (statusCode === 500) {
+          setAlert({
+            type: "alert-danger",
+            show: true,
+            text: "Sorry of inconvenience Please try again later",
+          });
           setLoading(false);
-          if (alertType !== "alert-danger") setAlertType("alert-danger");
           return;
-        }
-        if (statusCode === 200) {
-          setisError(true);
-          setAlertText("Signup Successful please proceed to Login");
+        } else if (statusCode === 200) {
+          setAlert({
+            type: "alert-success",
+            show: true,
+            text: "Signup Successful please proceed to Login",
+          });
           setLoading(false);
-          setAlertType("alert-success");
           return;
         }
       } catch (error) {}
@@ -149,13 +160,13 @@ const SignupPage = () => {
                 title="10 Digit Phone No"
                 required
               />
-              {isError ? (
+              {alert.show ? (
                 <div
                   id="sgalert"
-                  className={`alert ${alertType} mt-4 text-center`}
+                  className={`alert ${alert.type} mt-4 text-center`}
                   role="alert"
                 >
-                  {alertText}
+                  {alert.text}
                 </div>
               ) : null}
               <div className="row mt-4 justify-content-center">
