@@ -8,12 +8,10 @@ const LoginPage = () => {
   const context = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
-  const [isError, setisError] = useState(false);
-  const [alertMsg, setAlertMsg] = useState(
-    <>
-      Sorry of inconvenience <br /> Please try again later
-    </>
-  );
+  const [alert, setAlert] = useState({
+    show: false,
+    text: "",
+  });
   const history = useHistory();
 
   useEffect(() => {
@@ -30,9 +28,9 @@ const LoginPage = () => {
   const checkText = () => {
     if (
       document.getElementById("username").value !== "" ||
-      (document.getElementById("password").value !== "" && isError)
+      (document.getElementById("password").value !== "" && alert.show)
     ) {
-      setisError(false);
+      setAlert({ ...alert, show: false });
     }
   };
 
@@ -51,11 +49,7 @@ const LoginPage = () => {
         setLoading(false);
 
         if (statusCode === 401) {
-          setisError(true);
-          setAlertMsg("Check Username/Password");
-          context.setAuth({
-            status: false,
-          });
+          setAlert({ show: true, text: "Check Username/Password" });
           return;
         } else if (statusCode === 200) {
           context.setAuth({
@@ -66,19 +60,17 @@ const LoginPage = () => {
           history.push("/");
           return;
         } else if (statusCode === 204) {
-          setisError(true);
-          setAlertMsg("Username/Email not found !");
-          context.setAuth({
-            status: false,
-          });
+          setAlert({ show: true, text: "Username/Email not found !" });
           return;
         }
-        setisError(true);
-        setAlertMsg(
-          <>
-            Sorry of inconvenience <br /> Please try again later
-          </>
-        );
+        setAlert({
+          show: true,
+          text: (
+            <>
+              Sorry of inconvenience <br /> Please try again later
+            </>
+          ),
+        });
       } catch (error) {}
     }
   };
@@ -115,13 +107,13 @@ const LoginPage = () => {
                 style={{ maxWidth: "90%" }}
                 required
               />
-              {isError ? (
+              {alert.show ? (
                 <div
                   id="alter-div"
                   className="alert alert-danger mt-4 text-center"
                   role="alert"
                 >
-                  {alertMsg}
+                  {alert.text}
                 </div>
               ) : null}
               <div className="row mt-4 justify-content-center">
