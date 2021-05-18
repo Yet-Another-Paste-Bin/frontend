@@ -97,6 +97,21 @@ function App() {
           </Router>
         </BinContextProvider>
       </AuthContextProvider>
+      <footer className="page-footer">
+        <div className="row justify-content-center text-secondary my-3 mx-0">
+          <span className="text-secondary">
+            Tejasvp25 © 2020 · Made with{" "}
+            <span role="img">
+              <img
+                src="https://madewithlove.org.in/favicon-16x16.png?v=ngkxyOrw9y"
+                alt="love"
+              />
+              &nbsp;
+            </span>
+            in India
+          </span>
+        </div>
+      </footer>
     </div>
   );
 }

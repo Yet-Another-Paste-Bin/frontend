@@ -28,7 +28,7 @@
   font-size: 1rem;
   overflow-x: auto;
   display: inline;
-  height: 80vh;
+  height: 75vh;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
@@ -167,4 +167,22 @@ visited {
   display: inline;
   height: 30vh;
   max-height: 100vh;
+}
+
+footer.page-footer {
+  bottom: 0;
+}
+
+i.social-icons {
+  font-size: 30px;
+  color: black !important;
+}
+
+a.social-custom-link {
+  text-decoration: none;
+}
+img.bmc {
+  max-height: 50px !important;
+  max-width: 160px !important;
+  color: #000;
 }

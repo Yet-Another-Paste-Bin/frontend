@@ -76,7 +76,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={{ height: "80vh" }}>
+    <div style={{ maxHeight: "80vh" }}>
       <div className="wrapper">
         <div className="card" style={{ width: "20rem", maxWidth: "90%" }}>
           <div className="card-body center">
