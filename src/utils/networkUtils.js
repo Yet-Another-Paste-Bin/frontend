@@ -35,20 +35,12 @@ export const ReqSignup = async (username_para, email, password, phoneno) => {
       password,
       phoneno,
     });
-    const { id, token, username } = res.data;
 
-    localStorage.setItem("id", id);
-    localStorage.setItem("token", token);
-    localStorage.setItem("username", username);
     return {
-      status: true,
-      error: false,
-      username,
-      token,
       statusCode: res.status,
     };
   } catch (error) {
-    return { status: false, error: true, statusCode: error.response.status };
+    return { statusCode: 500 };
   }
 };
 

@@ -5,12 +5,11 @@ import { MoonLoader } from "react-spinners";
 import { useHistory } from "react-router";
 
 const SignupPage = () => {
-  const context = useContext(AuthContext);
-
   const [loading, setLoading] = useState(false);
   const [isError, setisError] = useState(false);
   const [alertText, setAlertText] = useState("");
   const history = useHistory();
+  const [alertType, setAlertType] = useState("alert-danger");
 
   useEffect(() => {
     if (loading) {
@@ -51,40 +50,34 @@ const SignupPage = () => {
     if (![username_text, password, conf, email, phoneno].includes("")) {
       setLoading(true);
       try {
-        const {
-          status = false,
-          error = false,
-          username,
-          token,
-          statusCode,
-        } = await ReqSignup(username_text, email, password, phoneno);
+        const { statusCode } = await ReqSignup(
+          username_text,
+          email,
+          password,
+          phoneno
+        );
 
-        if (statusCode && statusCode === 400) {
+        if (statusCode === 400) {
           setisError(true);
           setAlertText("Account with given Username/Email already exists !");
           setLoading(false);
+          if (alertType !== "alert-danger") setAlertType("alert-danger");
           return;
         }
-        if (error || statusCode === 500) {
+        if (statusCode === 500) {
           setisError(true);
           setAlertText("Sorry of inconvenience Please try again later");
           setLoading(false);
+          if (alertType !== "alert-danger") setAlertType("alert-danger");
           return;
         }
-        if (!status) {
-          context.setAuth({
-            status,
-          });
+        if (statusCode === 200) {
+          setisError(true);
+          setAlertText("Signup Successful please proceed to Login");
           setLoading(false);
+          setAlertType("alert-success");
           return;
         }
-        context.setAuth({
-          status,
-          username,
-          authtoken: token,
-        });
-        setLoading(false);
-        history.push("/");
       } catch (error) {}
     }
   };
@@ -159,7 +152,7 @@ const SignupPage = () => {
               {isError ? (
                 <div
                   id="sgalert"
-                  className="alert alert-danger mt-4 text-center"
+                  className={`alert ${alertType} mt-4 text-center`}
                   role="alert"
                 >
                   {alertText}
