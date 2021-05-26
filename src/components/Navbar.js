@@ -37,11 +37,12 @@ const Navbar = (props) => {
     const isPrivate = document.getElementById("privatbin")?.checked || false;
     setRequestState({ state: RequestStates.requesting, message: "" });
     const res = await ReqPostBin(bin, isPrivate);
-    if (res.status === 200 && res.data.id) {
+
+    if (res.status === 200 && res.data.binId) {
       if (document.getElementById("privatbin")) {
         document.getElementById("privatbin").checked = false;
       }
-      setBinLink(window.location.origin.toString() + "/" + res.data.id);
+      setBinLink(window.location.origin.toString() + "/" + res.data.binId);
       setRequestState({ state: RequestStates.requestSuccessful });
       return;
     }
