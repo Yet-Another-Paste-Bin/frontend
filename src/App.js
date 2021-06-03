@@ -98,9 +98,18 @@ function App() {
         </BinContextProvider>
       </AuthContextProvider>
       <footer className="page-footer">
-        <div className="row justify-content-center text-secondary my-3 mx-0">
+        <div className="row justify-content-center text-secondary mt-1 mx-0">
           <span className="text-secondary">
-            Tejasvp25 © 2021 · Made with
+            &nbsp;
+            <a
+              className="social-custom-link text-secondary"
+              href="https://github.com/Tejasvp25"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Tejasvp25
+            </a>{" "}
+            © 2021 · Made with{" "}
             <span role="img">
               <img
                 src="https://madewithlove.org.in/favicon-16x16.png?v=ngkxyOrw9y"
@@ -109,6 +118,26 @@ function App() {
               &nbsp;
             </span>
             in India
+          </span>
+        </div>
+        <div className="row justify-content-center text-secondary mx-0">
+          <span className="text-secondary">
+            <a
+              className="social-custom-link text-secondary"
+              href="https://github.com/Yet-Another-Paste-Bin"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span role="img">
+                <img
+                  src="https://github.com/devicons/devicon/raw/master/icons/github/github-original.svg"
+                  alt="Git"
+                  style={{ height: "20px" }}
+                />
+                &nbsp;
+              </span>
+              Yet Another Paste Bin
+            </a>
           </span>
         </div>
       </footer>
