@@ -37,7 +37,7 @@ const ForgetPasswordPage = () => {
     const email = document.getElementById("email").value;
     const phoneno = document.getElementById("phoneno").value;
     setLoading(true);
-    ReqPasswordResetToken(username, email, phoneno)
+    ReqPasswordResetToken(username.toLowerCase(), email.toLowerCase(), phoneno)
       .then(({ status, passwordresettoken }) => {
         if (status === 200) {
           setResetLink(`./passwordreset?token=${passwordresettoken}`);

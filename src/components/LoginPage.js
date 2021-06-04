@@ -43,7 +43,7 @@ const LoginPage = () => {
       setLoading(true);
       try {
         const { username, token, statusCode } = await ReqLogin(
-          username_text,
+          username_text.toLowerCase(),
           password
         );
         setLoading(false);

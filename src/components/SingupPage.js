@@ -57,8 +57,8 @@ const SignupPage = () => {
       setLoading(true);
       try {
         const { statusCode } = await ReqSignup(
-          username_text,
-          email,
+          username_text.toLowerCase(),
+          email.toLowerCase(),
           password,
           phoneno
         );
