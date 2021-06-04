@@ -7,6 +7,7 @@ import MyBins from "./components/MyBins";
 import Navbar from "./components/Navbar";
 import PasswordResetPage from "./components/PasswordResetPage";
 import SignupPage from "./components/SingupPage";
+import About from "./components/About";
 import AuthContextProvider from "./contexts/AuthContext";
 import BinContextProvider, { BinContext } from "./contexts/BinContext";
 import { ReqBin } from "./utils/networkUtils";
@@ -78,6 +79,7 @@ function App() {
           <Router>
             <Navbar />
             <Switch>
+              <Route path="/about" component={About} exact />
               <Route path="/login" component={LoginPage} exact />
               <Route path="/" component={Home} exact />
               <Route path="/signup" component={SignupPage} exact />

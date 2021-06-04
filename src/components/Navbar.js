@@ -153,6 +153,11 @@ const Navbar = (props) => {
               </button>
             </Link>
           ) : null}
+          <Link to="/about">
+            <button type="button" className="btn btn-secondary m-1">
+              About
+            </button>
+          </Link>
         </>
       );
     }
