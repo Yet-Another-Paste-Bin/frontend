@@ -43,7 +43,7 @@ const BinItem = (props) => {
     <div className="container m-1">
       <div className="card">
         <div className="card-header">
-          <div className="row m-1">
+          <div className="row m-1" style={{ wordBreak: "break-word" }}>
             {bin.private ? (
               <>
                 <span className="mx-1">
