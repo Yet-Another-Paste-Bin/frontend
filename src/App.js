@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ForgetPasswordPage from "./components/ForgetPasswordPage";
-import LoginPage from "./components/LoginPage";
+import LoginSignupPage from "./components/LoginSignupPage";
 import MyBins from "./components/MyBins";
 import Navbar from "./components/Navbar";
 import PasswordResetPage from "./components/PasswordResetPage";
-import SignupPage from "./components/SingupPage";
 import About from "./components/About";
 import AuthContextProvider from "./contexts/AuthContext";
 import BinContextProvider, { BinContext } from "./contexts/BinContext";
@@ -80,9 +79,9 @@ function App() {
             <Navbar />
             <Switch>
               <Route path="/about" component={About} exact />
-              <Route path="/login" component={LoginPage} exact />
+              <Route path="/login" component={LoginSignupPage} exact />
               <Route path="/" component={Home} exact />
-              <Route path="/signup" component={SignupPage} exact />
+              <Route path="/signup" component={LoginSignupPage} exact />
               <Route path="/mybins" component={MyBins} exact />
               <Route
                 path="/forgotpassword"

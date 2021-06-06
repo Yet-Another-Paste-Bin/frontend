@@ -4,7 +4,7 @@ import { ReqLogin } from "../utils/networkUtils";
 import { MoonLoader } from "react-spinners";
 import { useHistory } from "react-router";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const context = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
@@ -131,7 +131,7 @@ const LoginPage = () => {
                     <button
                       type="button"
                       className="btn btn-secondary m-1"
-                      onClick={() => history.push("/signup")}
+                      onClick={props.onClickSignup}
                     >
                       Signup
                     </button>
