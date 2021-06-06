@@ -1,7 +1,5 @@
-
-
 <h1 align="center">
-Yet Another Paste Bin 
+Yet Another Paste Bin
 
 </h1>
 
@@ -22,6 +20,7 @@ Yet Another Paste Bin
 ## [Live Site](https://yapbin.netlify.app/)
 
 # Clone or Download
+
 ```terminal
 $ git clone https://github.com/Yet-Another-Paste-Bin/frontend
 $ npm i
@@ -30,13 +29,13 @@ $ npm i
 # Usage
 
 ## Prerequirements
+
 - [React JS](https://reactjs.org/docs/create-a-new-react-app.html)
 - [Node](https://nodejs.org/en/download/) ^10.0.0
 - [npm](https://nodejs.org/en/download/package-manager/)
 
-
-
 ### Prepare Enviornment variables
+
 ```terminal
 // in the root level
 $ export REACT_APP_BASE_URL=YOUR_API_BASE_URL
@@ -46,7 +45,7 @@ $ export REACT_APP_BASE_URL=YOUR_API_BASE_URL
 
 ```terminal
 $ npm i       // npm install pacakges
-$ npm run start 
+$ npm run start
 ```
 
 ### Start (Production)
@@ -57,6 +56,7 @@ $ npm run build // run it in production mode
 ```
 
 # Dependencies
+
 axios: ^0.21.1
 
 nanoid: ^3.1.22
@@ -73,6 +73,24 @@ react-spinners: ^0.10.6
 
 web-vitals: ^1.1.1
 
+# Screenshots
+
+## About
+
+![Alt text](/art/about.jpg?raw=true "About")
+
+## Home
+
+![Alt text](/art/homepage.jpg?raw=true "Home")
+
+## Login
+
+![Alt text](/art/login.jpg?raw=true "Login")
+
+## Signup
+
+![Alt text](/art/signup.jpg?raw=true "Signup")
+
 ## Author
 
 👤 **Tejasvp25**
@@ -83,7 +101,7 @@ web-vitals: ^1.1.1
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Yet-Another-Paste-Bin/frontend/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Yet-Another-Paste-Bin/frontend/issues).
 
 ## Show your support
 
