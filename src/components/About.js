@@ -3,7 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <div
-      className="center"
+      className="center fade-in"
       style={{
         minHeight: "60vh",
         color: "rgb(189, 189, 189)",
@@ -24,7 +24,7 @@ const About = () => {
       </a>
       <a
         className="social-custom-link text-secondary"
-        href="http://https://github.com/Tejasvp25"
+        href="https://github.com/Tejasvp25"
         target="_blank"
         rel="noopener noreferrer"
       >

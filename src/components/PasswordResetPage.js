@@ -62,7 +62,7 @@ const PasswordResetPage = (props) => {
   };
 
   return (
-    <div style={{ height: "80vh" }}>
+    <div className="fade-in" style={{ height: "80vh" }}>
       <div className="wrapper">
         <div className="card" style={{ width: "20rem", maxWidth: "90%" }}>
           <div className="card-body center">

@@ -10,20 +10,22 @@ const LoginSignupPage = (props) => {
     return () => {};
   }, [props]);
   return (
-    <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
-      <LoginPage
-        onClickSignup={(e) => {
-          e.preventDefault();
-          setFlipped(!flipped);
-        }}
-      />
-      <SignupPage
-        onClickLogin={(e) => {
-          e.preventDefault();
-          setFlipped(!flipped);
-        }}
-      />
-    </ReactCardFlip>
+    <div className="fade-in">
+      <ReactCardFlip isFlipped={flipped} flipDirection="horizontal">
+        <LoginPage
+          onClickSignup={(e) => {
+            e.preventDefault();
+            setFlipped(!flipped);
+          }}
+        />
+        <SignupPage
+          onClickLogin={(e) => {
+            e.preventDefault();
+            setFlipped(!flipped);
+          }}
+        />
+      </ReactCardFlip>
+    </div>
   );
 };
 

@@ -53,7 +53,7 @@ class Home extends Component {
 
   render() {
     return (
-      <main>
+      <main className="fade-in">
         <div className="center mb-3">
           <textarea
             className="full-size p-3"

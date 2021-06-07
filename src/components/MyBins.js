@@ -35,7 +35,7 @@ class MyBins extends Component {
     return (
       <>
         {this.state.bins.length > 0 ? (
-          <div className="center">
+          <div className="center fade-in">
             {this.state.bins.map((e) => (
               <BinItem bin={e} key={nanoid()} deleteFn={this.deleteBin} />
             ))}
