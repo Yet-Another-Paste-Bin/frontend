@@ -9,12 +9,13 @@ export const ReqLogin = async (username_para, password) => {
       username: username_para,
       password,
     });
-    const { id, token, username } = res.data;
+    const { id, token, username, expiry } = res.data;
 
     if (res.status === 200) {
       localStorage.setItem("id", id);
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
+      localStorage.setItem("expiry", expiry);
     }
 
     return {

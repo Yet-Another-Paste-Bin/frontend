@@ -3,7 +3,10 @@ import React, { useState, createContext } from "react";
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
-  const status = localStorage.getItem("id") ? true : false;
+  const expiry = localStorage.getItem("expiry");
+  const isExpired = new Date(expiry) < new Date();
+  if (isExpired) localStorage.clear();
+  const status = localStorage.getItem("id") ? !isExpired : false;
   const authtoken = localStorage.getItem("token");
   const username = localStorage.getItem("username");
 
