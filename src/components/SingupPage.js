@@ -62,7 +62,6 @@ const SignupPage = (props) => {
           password,
           phoneno
         );
-
         if (statusCode === 400) {
           setAlert({
             type: "alert-danger",
@@ -85,6 +84,14 @@ const SignupPage = (props) => {
             type: "alert-success",
             show: true,
             text: "Signup Successful please proceed to Login",
+          });
+          setLoading(false);
+          return;
+        } else if (statusCode === 409) {
+          setAlert({
+            type: "alert-danger",
+            show: true,
+            text: "Username/Email already exists",
           });
           setLoading(false);
           return;

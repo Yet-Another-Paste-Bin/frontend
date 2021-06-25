@@ -36,11 +36,13 @@ export const ReqSignup = async (username_para, email, password, phoneno) => {
       password,
       phoneno,
     });
-
     return {
       statusCode: res.status,
     };
   } catch (error) {
+    const pattern = /\d{3}/i;
+    const result = error.toString().match(pattern);
+    if (result) return { statusCode: parseInt(result.toString()) };
     return { statusCode: 500 };
   }
 };
